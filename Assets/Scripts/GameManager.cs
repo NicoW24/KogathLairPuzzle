@@ -22,14 +22,12 @@ namespace Game.Core
         {
             //pause player movement
             OnPausePlayerController.Invoke();
-            UIManager.Instance.TogglePause();
         }
 
         public void MinigameFinished()
         {
             //resume player movement
             OnResumePlayerController.Invoke();
-            UIManager.Instance.TogglePause();
         }
     }
 }

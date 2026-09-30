@@ -1,7 +1,8 @@
 using UnityEngine;
 using Unity.Cinemachine;
+using Game.Core;
 
-namespace Game.Core
+namespace Game.UI
 {
     public class UIManager : MonoBehaviour
     {
@@ -15,6 +16,18 @@ namespace Game.Core
             {
                 Instance = this;
             }
+        }
+
+        void Start()
+        {
+            GameManager.Instance.OnPausePlayerController += TogglePause;
+            GameManager.Instance.OnResumePlayerController += TogglePause;
+        }
+
+        void OnDestroy()
+        {
+            GameManager.Instance.OnPausePlayerController -= TogglePause;
+            GameManager.Instance.OnResumePlayerController -= TogglePause;
         }
 
         public void TogglePause()

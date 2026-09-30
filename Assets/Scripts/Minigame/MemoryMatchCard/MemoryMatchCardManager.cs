@@ -17,7 +17,6 @@ namespace Game.Minigame
         bool _isProcessingMatch = false;
         int _matchesFound = 0;
 
-        [ContextMenu("Play")]
         public override void StartMinigame()
         {
             base.StartMinigame();
@@ -32,6 +31,7 @@ namespace Game.Minigame
             {
                 cardObject.gameObject.SetActive(false);
             }
+            this.gameObject.SetActive(false);
         }
 
         public override void SetupMinigame()
