@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.UI;
 
 namespace Game.Minigame
 {
@@ -37,7 +38,7 @@ namespace Game.Minigame
 
         public override void MinigameWin()
         {
-            Debug.Log("Game Over - You Win!");
+            PromptUIObject.Instance.ShowUI("Player Win");
             OnMinigameWin?.Invoke();
             base.MinigameWin();
         }

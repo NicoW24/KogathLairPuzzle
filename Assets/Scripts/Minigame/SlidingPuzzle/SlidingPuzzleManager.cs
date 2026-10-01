@@ -1,3 +1,4 @@
+using Game.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,9 @@ namespace Game.Minigame
 {
     public class SlidingPuzzleManager : MinigameManager
     {
-        [Header("Grid Configuration")]
         [SerializeField] int _gridSize = 3;
         [SerializeField] float _slideDuration = 0.15f;
 
-        [Header("UI References")]
         [SerializeField] RectTransform _container;
         [SerializeField] GridLayoutGroup _gridLayout;
         [SerializeField] SlidingTileObject _tilePrefab;
@@ -39,6 +38,7 @@ namespace Game.Minigame
 
         public override void MinigameWin()
         {
+            PromptUIObject.Instance.ShowUI("Player Win");
             OnMinigameWin?.Invoke();
             base.MinigameWin();
         }
