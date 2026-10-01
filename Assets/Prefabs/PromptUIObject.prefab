@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -186,4 +186,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962390052ea11854a82904a0f3bef116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.UI::Game.UI.InteractUIObject
-  promptTextUIObject: {fileID: 7849329255139528836}
+  _promptTextUIObject: {fileID: 7849329255139528836}

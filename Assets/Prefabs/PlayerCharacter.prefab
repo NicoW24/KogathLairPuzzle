@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5060550922606357305}
   - component: {fileID: 5187952292728808147}
   - component: {fileID: 7317174118863173933}
+  - component: {fileID: 8386384741786968525}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -74,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4f1e67ddcf97546a827e9e92e8500a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _moveSpeed: 6
+  _moveSpeed: 8
   _rotationSpeed: 10
   _gravity: -9.81
   _animator: {fileID: 8192986032006579964}
@@ -128,6 +129,23 @@ MonoBehaviour:
     m_Bits: 8
   _interactActionRef: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _showGizmos: 1
+--- !u!114 &8386384741786968525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59933211861561854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a1212f58636b242af812152dc16d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Core::Game.Core.CharacterStat
+  _characterStatDataSO: {fileID: 11400000, guid: 45ef1ce84724ac34fb1acb1bf06db143, type: 2}
+  _currentHP: 0
+  _currentDef: 0
+  _currentAttack: 0
+  _isDead: 0
 --- !u!1 &8302066601675034965
 GameObject:
   m_ObjectHideFlags: 0

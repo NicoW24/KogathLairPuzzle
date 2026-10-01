@@ -6,7 +6,7 @@ namespace Game.UI
     public class PromptUIObject : MonoBehaviour
     {
         public static PromptUIObject Instance;
-        [SerializeField] TextMeshProUGUI promptTextUIObject;
+        [SerializeField] TextMeshProUGUI _promptTextUIObject;
         void Awake()
         {
             if(Instance == null)
@@ -18,13 +18,13 @@ namespace Game.UI
 
         public void ShowUI(string promptText)
         {
-            promptTextUIObject.text = promptText;
-            promptTextUIObject.gameObject.SetActive(true);
+            _promptTextUIObject.text = promptText;
+            _promptTextUIObject.gameObject.SetActive(true);
         }
 
         public void HideUI()
         {
-            promptTextUIObject.gameObject.SetActive(false);
+            _promptTextUIObject.gameObject.SetActive(false);
         }
     }
 }
