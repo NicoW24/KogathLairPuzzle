@@ -35,6 +35,13 @@ namespace Game.Minigame
             this.gameObject.SetActive(false);
         }
 
+        public override void MinigameWin()
+        {
+            Debug.Log("Game Over - You Win!");
+            OnMinigameWin?.Invoke();
+            base.MinigameWin();
+        }
+
         public override void SetupMinigame()
         {
             base.SetupMinigame();
@@ -102,9 +109,7 @@ namespace Game.Minigame
                 if (_matchesFound >= _listCardSprite.Count)
                 {
                     yield return new WaitForSeconds(0.75f);//delay
-                    Debug.Log("Game Over - You Win!");
-                    OnMinigameWin?.Invoke();
-                    MinigameFinish();
+                    MinigameWin();
                 }
             }
             else

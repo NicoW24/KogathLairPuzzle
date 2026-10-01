@@ -37,6 +37,12 @@ namespace Game.Minigame
             this.gameObject.SetActive(false);
         }
 
+        public override void MinigameWin()
+        {
+            OnMinigameWin?.Invoke();
+            base.MinigameWin();
+        }
+
         public override void SetupMinigame()
         {
             _totalTiles = _gridSize * _gridSize;
@@ -209,8 +215,7 @@ namespace Game.Minigame
                     return;
                 }
             }
-            OnMinigameWin?.Invoke();
-            MinigameFinish();
+            MinigameWin();
         }
     }
 }

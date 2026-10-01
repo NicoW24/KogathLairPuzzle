@@ -20,6 +20,11 @@ namespace Game.Minigame
             GameManager.Instance.MinigameFinished();
         }
 
+        public virtual void MinigameWin() 
+        {
+            MinigameFinish();
+        }
+
         public virtual void SetupMinigame() { }
 
         public virtual void CancelMinigame() 
