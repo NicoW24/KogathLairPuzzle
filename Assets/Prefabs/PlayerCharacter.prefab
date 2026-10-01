@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8386384741786968525}
   m_Layer: 0
   m_Name: PlayerCharacter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,6 +79,7 @@ MonoBehaviour:
   _rotationSpeed: 10
   _gravity: -9.81
   _animator: {fileID: 8192986032006579964}
+  _attackActionRef: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &5187952292728808147
 MonoBehaviour:
   m_ObjectHideFlags: 0

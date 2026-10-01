@@ -14,6 +14,8 @@ namespace Game.Core
         [Header("Animation Settings")]
         [SerializeField] Animator _animator;
 
+        [SerializeField] InputActionReference _attackActionRef;
+
         CharacterController _controller;
         PlayerInput _playerInput;
         Transform _mainCameraTransform;
@@ -36,6 +38,34 @@ namespace Game.Core
             }
         }
 
+        void OnEnable()
+        {
+            if (_attackActionRef != null && _attackActionRef.action != null)
+            {
+                _attackActionRef.action.Enable();
+                _attackActionRef.action.performed += OnAttackPerformed;
+            }
+        }
+
+        void OnDisable()
+        {
+            if (_attackActionRef != null && _attackActionRef.action != null)
+            {
+                _attackActionRef.action.performed -= OnAttackPerformed;
+                _attackActionRef.action.Disable();
+            }
+        }
+        void OnAttackPerformed(InputAction.CallbackContext context)
+        {
+            _animator.SetTrigger("Attack");
+        }
+
+        bool IsAttacking()
+        {
+            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(1);
+            return stateInfo.IsName("Attack") && stateInfo.normalizedTime < 1.0f;
+        }
+
         void Start()
         {
             GameManager.Instance.OnPausePlayerController += PausePlayerController;
@@ -50,7 +80,7 @@ namespace Game.Core
 
         void Update()
         {
-            if (!_canMove)
+            if (!_canMove || IsAttacking())
             {
                 return;
             }
