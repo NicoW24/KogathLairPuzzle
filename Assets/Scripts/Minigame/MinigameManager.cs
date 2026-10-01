@@ -1,10 +1,15 @@
 using UnityEngine;
 using Game.Core;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace Game.Minigame
 {
     public class MinigameManager : MonoBehaviour
     {
+        [SerializeField] protected Button _buttonCancel;
+        public UnityEvent OnMinigameWin;
+
         public virtual void StartMinigame()
         {
             GameManager.Instance.MinigameStarted();
@@ -16,6 +21,11 @@ namespace Game.Minigame
         }
 
         public virtual void SetupMinigame() { }
+
+        public virtual void CancelMinigame() 
+        {
+            MinigameFinish();
+        }
     }
 }
 

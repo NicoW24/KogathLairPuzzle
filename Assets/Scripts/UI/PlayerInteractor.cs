@@ -48,8 +48,8 @@ public class PlayerInteractor : MonoBehaviour
     {
         if (_currentInteractable != null)
         {
-            _currentInteractable.Interact(gameObject);
             PromptUIObject.Instance.HideUI();
+            _currentInteractable.Interact(gameObject);
         }
     }
 
@@ -67,13 +67,19 @@ public class PlayerInteractor : MonoBehaviour
 
         if (_hasHit && _hitInfo.collider.TryGetComponent(out IInteractable interactable))
         {
+            if (_currentInteractable == null)
+            {
+                PromptUIObject.Instance.ShowUI(interactable.GetInteractPrompt());
+            }
             _currentInteractable = interactable;
-            PromptUIObject.Instance.ShowUI(interactable.GetInteractPrompt());
         }
         else
         {
+            if(_currentInteractable != null)
+            {
+                PromptUIObject.Instance.HideUI();
+            }
             _currentInteractable = null;
-            PromptUIObject.Instance.HideUI();
         }
     }
 

@@ -3,12 +3,32 @@ guid: 744eb531b30ba6641a223168821ce5a0
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: warrok_MAT
+    second: {fileID: 2100000, guid: 272c215601411d64fa62458f7804b9bc, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bear_diffuse
+    second: {fileID: 2800000, guid: a528094ac760d154c8a4de87687f2f1d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bear_normal
+    second: {fileID: 2800000, guid: f1aefd6dde3ca1e4490090248e20486a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bear_specular
+    second: {fileID: 2800000, guid: 95ae6fc5b320d9f419500fc8596217b4, type: 3}
   materials:
     materialImportMode: 2
-    materialName: 0
+    materialName: 1
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

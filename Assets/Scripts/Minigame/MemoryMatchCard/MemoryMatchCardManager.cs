@@ -29,6 +29,7 @@ namespace Game.Minigame
             base.MinigameFinish();
             foreach (MemoryMatchCardObject cardObject in _spawnedCards)
             {
+                cardObject.ShowBack();
                 cardObject.gameObject.SetActive(false);
             }
             this.gameObject.SetActive(false);
@@ -102,6 +103,7 @@ namespace Game.Minigame
                 {
                     yield return new WaitForSeconds(0.75f);//delay
                     Debug.Log("Game Over - You Win!");
+                    OnMinigameWin?.Invoke();
                     MinigameFinish();
                 }
             }

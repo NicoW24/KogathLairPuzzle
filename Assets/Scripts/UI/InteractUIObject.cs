@@ -24,11 +24,6 @@ namespace Game.UI
 
         public void HideUI()
         {
-            if (!promptTextUIObject.gameObject.activeSelf)
-            {
-                return;
-            }
-
             promptTextUIObject.gameObject.SetActive(false);
         }
     }
