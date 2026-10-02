@@ -146,6 +146,7 @@ MonoBehaviour:
   _currentHP: 0
   _currentDef: 0
   _currentAttack: 0
+  _characterHPBar: {fileID: 0}
   _isDead: 0
 --- !u!1 &8302066601675034965
 GameObject:
@@ -256,7 +257,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a91a1ffaeaef48948a28f8a02edddccf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0

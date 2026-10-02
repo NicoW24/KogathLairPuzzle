@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Core
 {
@@ -9,6 +10,10 @@ namespace Game.Core
         [SerializeField] float _currentDef;
         [SerializeField] float _currentAttack;
 
+        [SerializeField] CharacterHPBar _characterHPBar;
+        public UnityEvent OnDead = new UnityEvent();
+        public UnityEvent AfterDeadEvent = new UnityEvent();
+
         [SerializeField] bool _isDead = false;
 
         void Start()
@@ -17,6 +22,9 @@ namespace Game.Core
             _currentHP = _characterStatDataSO.HP;
             _currentDef = _characterStatDataSO.Def;
             _currentAttack = _characterStatDataSO.Attack;
+
+            //set max hp to healthbar object
+            _characterHPBar.SetupHPBar(_currentHP);
         }
 
         public void ChangeAttack(float attack)
@@ -40,7 +48,15 @@ namespace Game.Core
             if(_currentHP <= 0)
             {
                 _isDead = true;
+                OnDead?.Invoke();
             }
+            _characterHPBar.UpdateHpBar(_currentHP);
+        }
+
+        public void Dead()
+        {
+            gameObject.SetActive(false);
+            AfterDeadEvent?.Invoke();
         }
 
         public bool IsDead()

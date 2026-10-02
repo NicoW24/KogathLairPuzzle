@@ -18,14 +18,23 @@ namespace Game.Core
             }
         }
 
+        void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         public void MinigameStarted()
         {
+            Cursor.lockState = CursorLockMode.None;
+
             //pause player movement
             OnPausePlayerController.Invoke();
         }
 
         public void MinigameFinished()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+
             //resume player movement
             OnResumePlayerController.Invoke();
         }

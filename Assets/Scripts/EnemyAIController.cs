@@ -35,7 +35,7 @@ namespace Game.Core
 
         void Update()
         {
-            if (_player == null) return;
+            if (_player == null || _characterStat.IsDead()) return;
 
             if (IsAttacking())
             {
@@ -92,6 +92,11 @@ namespace Game.Core
         void AttackPlayer()
         {
             _animator.SetTrigger("Attack");
+        }
+
+        public void Die()
+        {
+            _animator.SetTrigger("Die");
         }
 
         void OnDrawGizmosSelected()

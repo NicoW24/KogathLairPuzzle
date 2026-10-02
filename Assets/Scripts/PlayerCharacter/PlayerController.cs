@@ -20,6 +20,7 @@ namespace Game.Core
         PlayerInput _playerInput;
         Transform _mainCameraTransform;
         InputAction _moveAction;
+        CharacterStat _characterStat;
 
         Vector2 _moveInput;
         Vector3 _verticalVelocity;
@@ -30,6 +31,7 @@ namespace Game.Core
         {
             _controller = GetComponent<CharacterController>();
             _playerInput = GetComponent<PlayerInput>();
+            _characterStat = GetComponent<CharacterStat>();
             _moveAction = _playerInput.actions["Move"];
 
             if (Camera.main != null)
@@ -38,25 +40,12 @@ namespace Game.Core
             }
         }
 
-        void OnEnable()
-        {
-            if (_attackActionRef != null && _attackActionRef.action != null)
-            {
-                _attackActionRef.action.Enable();
-                _attackActionRef.action.performed += OnAttackPerformed;
-            }
-        }
-
-        void OnDisable()
-        {
-            if (_attackActionRef != null && _attackActionRef.action != null)
-            {
-                _attackActionRef.action.performed -= OnAttackPerformed;
-                _attackActionRef.action.Disable();
-            }
-        }
         void OnAttackPerformed(InputAction.CallbackContext context)
         {
+            if (!_canMove)
+            {
+                return;
+            }
             _animator.SetTrigger("Attack");
         }
 
@@ -66,21 +55,38 @@ namespace Game.Core
             return stateInfo.IsName("Attack") && stateInfo.normalizedTime < 1.0f;
         }
 
+        public void Die()
+        {
+            _animator.SetTrigger("Die");
+        }
+
         void Start()
         {
             GameManager.Instance.OnPausePlayerController += PausePlayerController;
             GameManager.Instance.OnResumePlayerController += ResumePlayerController;
+
+            if (_attackActionRef != null && _attackActionRef.action != null)
+            {
+                _attackActionRef.action.Enable();
+                _attackActionRef.action.performed += OnAttackPerformed;
+            }
         }
 
         void OnDestroy()
         {
             GameManager.Instance.OnPausePlayerController -= PausePlayerController;
             GameManager.Instance.OnResumePlayerController -= ResumePlayerController;
+
+            if (_attackActionRef != null && _attackActionRef.action != null)
+            {
+                _attackActionRef.action.performed -= OnAttackPerformed;
+                _attackActionRef.action.Disable();
+            }
         }
 
         void Update()
         {
-            if (!_canMove || IsAttacking())
+            if (!_canMove || IsAttacking()|| _characterStat.IsDead())
             {
                 return;
             }

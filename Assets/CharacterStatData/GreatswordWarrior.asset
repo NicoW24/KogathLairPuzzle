@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GreatswordWarrior
   m_EditorClassIdentifier: Game.Core::Game.Core.CharacterStatSO
   HP: 150
-  Def: 20
+  Def: 0
   Attack: 50
