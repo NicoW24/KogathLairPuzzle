@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: efe38c25b4e89034db53d380e7ecde6a
+guid: 9904af02cccd18f46bf417d148bfef10
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -46,7 +46,7 @@ ModelImporter:
       loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1

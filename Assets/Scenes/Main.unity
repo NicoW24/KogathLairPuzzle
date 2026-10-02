@@ -14211,7 +14211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8192986032006579964, guid: 0f4b1547cd08b5543a0545a454346296, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8386384741786968525, guid: 0f4b1547cd08b5543a0545a454346296, type: 3}
       propertyPath: _characterHPBar
