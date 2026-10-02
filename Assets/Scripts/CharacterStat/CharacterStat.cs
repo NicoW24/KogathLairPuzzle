@@ -18,6 +18,25 @@ namespace Game.Core
 
         void Start()
         {
+            SetupInitStat();
+            GameManager.Instance.OnPlayAgain += PlayAgain;
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.Instance.OnPlayAgain -= PlayAgain;
+        }
+
+        void PlayAgain()
+        {
+            //reset stat and variable
+            SetupInitStat();
+            _isDead = false;
+            gameObject.SetActive(true);
+        }
+
+        void SetupInitStat()
+        {
             //init stat
             _currentHP = _characterStatDataSO.HP;
             _currentDef = _characterStatDataSO.Def;

@@ -28,6 +28,21 @@ namespace Game.Core
             }
         }
 
+        void Start()
+        {
+            GameManager.Instance.OnPlayAgain += PlayAgain;
+        }
+
+        void OnDestroy()
+        {
+            GameManager.Instance.OnPlayAgain -= PlayAgain;
+        }
+
+        void PlayAgain()
+        {
+            _isPlayed = false;
+        }
+
         public void PlayTimeline()
         {
             StartCoroutine(PlayTimelineRoutine());

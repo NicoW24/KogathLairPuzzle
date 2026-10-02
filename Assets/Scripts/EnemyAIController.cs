@@ -15,11 +15,14 @@ namespace Game.Core
         [SerializeField] CharacterStat _characterStat;
 
         [SerializeField] Animator _animator;
+        [SerializeField] Vector3 _firstPos;
         NavMeshAgent _agent;
         float _lastAttackTime;
 
         void Awake()
         {
+            _firstPos = transform.position;
+
             _agent = GetComponent<NavMeshAgent>();
             _characterStat = GetComponent<CharacterStat>();
 
@@ -31,6 +34,30 @@ namespace Game.Core
                     _player = playerObj.transform;
                 }
             }
+        }
+
+        void Start()
+        {
+            GameManager.Instance.OnPlayAgain += PlayAgain;
+        }
+
+        void OnDestroy()
+        {
+            GameManager.Instance.OnPlayAgain -= PlayAgain;
+        }
+
+        void PlayAgain()
+        {
+            _animator.Rebind();
+            _animator.Play("Idle", 0, 0f);
+
+            CharacterController controller = GetComponent<CharacterController>();
+            controller.enabled = false;
+            //reset pos
+            this.transform.position = _firstPos;
+            controller.enabled = true;
+            //reset variable
+            _lastAttackTime = Time.time;
         }
 
         void Update()

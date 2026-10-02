@@ -7,6 +7,7 @@ namespace Game.Core
     {
         public UnityAction OnPausePlayerController;
         public UnityAction OnResumePlayerController;
+        public UnityAction OnPlayAgain;
 
         public static GameManager Instance;
 
@@ -21,6 +22,19 @@ namespace Game.Core
         void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        public void PlayAgain()
+        {
+            OnPlayAgain?.Invoke();
+
+            //resume player movement
+            OnResumePlayerController.Invoke();
+        }
+
+        public void ExitGame()
+        {
+            Application.Quit();
         }
 
         public void MinigameStarted()

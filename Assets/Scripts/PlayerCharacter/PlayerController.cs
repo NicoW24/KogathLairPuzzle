@@ -13,7 +13,7 @@ namespace Game.Core
 
         [Header("Animation Settings")]
         [SerializeField] Animator _animator;
-
+        [SerializeField] ParticleSystem _particleAttackBoost;
         [SerializeField] InputActionReference _attackActionRef;
 
         CharacterController _controller;
@@ -22,6 +22,8 @@ namespace Game.Core
         InputAction _moveAction;
         CharacterStat _characterStat;
 
+        Vector3 _firstPos;
+        Quaternion _firstRot;
         Vector2 _moveInput;
         Vector3 _verticalVelocity;
 
@@ -29,6 +31,9 @@ namespace Game.Core
 
         void Awake()
         {
+            _firstPos = transform.position;
+            _firstRot = transform.rotation;
+
             _controller = GetComponent<CharacterController>();
             _playerInput = GetComponent<PlayerInput>();
             _characterStat = GetComponent<CharacterStat>();
@@ -39,6 +44,46 @@ namespace Game.Core
                 _mainCameraTransform = Camera.main.transform;
             }
         }
+        void Start()
+        {
+            GameManager.Instance.OnPausePlayerController += PausePlayerController;
+            GameManager.Instance.OnResumePlayerController += ResumePlayerController;
+
+            if (_attackActionRef != null && _attackActionRef.action != null)
+            {
+                _attackActionRef.action.Enable();
+                _attackActionRef.action.performed += OnAttackPerformed;
+            }
+
+            GameManager.Instance.OnPlayAgain += PlayAgain;
+        }
+
+        void OnDestroy()
+        {
+            GameManager.Instance.OnPausePlayerController -= PausePlayerController;
+            GameManager.Instance.OnResumePlayerController -= ResumePlayerController;
+
+            if (_attackActionRef != null && _attackActionRef.action != null)
+            {
+                _attackActionRef.action.performed -= OnAttackPerformed;
+                _attackActionRef.action.Disable();
+            }
+
+            GameManager.Instance.OnPlayAgain -= PlayAgain;
+        }
+
+        void PlayAgain()
+        {
+            CharacterController controller = GetComponent<CharacterController>();
+            controller.enabled = false;
+            //reset pos
+            this.transform.position = _firstPos;
+            this.transform.rotation = _firstRot;
+            controller.enabled = true;
+            //disable particle attack boost
+            _particleAttackBoost.gameObject.SetActive(false);
+        }
+
 
         void OnAttackPerformed(InputAction.CallbackContext context)
         {
@@ -59,31 +104,6 @@ namespace Game.Core
         {
             _animator.SetTrigger("Die");
         }
-
-        void Start()
-        {
-            GameManager.Instance.OnPausePlayerController += PausePlayerController;
-            GameManager.Instance.OnResumePlayerController += ResumePlayerController;
-
-            if (_attackActionRef != null && _attackActionRef.action != null)
-            {
-                _attackActionRef.action.Enable();
-                _attackActionRef.action.performed += OnAttackPerformed;
-            }
-        }
-
-        void OnDestroy()
-        {
-            GameManager.Instance.OnPausePlayerController -= PausePlayerController;
-            GameManager.Instance.OnResumePlayerController -= ResumePlayerController;
-
-            if (_attackActionRef != null && _attackActionRef.action != null)
-            {
-                _attackActionRef.action.performed -= OnAttackPerformed;
-                _attackActionRef.action.Disable();
-            }
-        }
-
         void Update()
         {
             if (!_canMove || IsAttacking()|| _characterStat.IsDead())
