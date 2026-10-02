@@ -67,7 +67,7 @@ public class PlayerInteractor : MonoBehaviour
 
         if (_hasHit && _hitInfo.collider.TryGetComponent(out IInteractable interactable))
         {
-            if (_currentInteractable == null)
+            if (_currentInteractable != null && !GameManager.Instance.IsMinigamePlaying())
             {
                 PromptUIObject.Instance.ShowUI(interactable.GetInteractPrompt());
             }

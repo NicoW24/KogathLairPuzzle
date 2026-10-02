@@ -30,7 +30,6 @@ namespace Game.Minigame
             base.MinigameFinish();
             foreach (MemoryMatchCardObject cardObject in _spawnedCards)
             {
-                cardObject.ShowBack();
                 cardObject.gameObject.SetActive(false);
             }
             this.gameObject.SetActive(false);

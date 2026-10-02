@@ -9,6 +9,8 @@ namespace Game.Core
         public UnityAction OnResumePlayerController;
         public UnityAction OnPlayAgain;
 
+        bool _minigamePlaying;
+
         public static GameManager Instance;
 
         void Awake()
@@ -37,10 +39,15 @@ namespace Game.Core
             Application.Quit();
         }
 
+        public bool IsMinigamePlaying()
+        {
+            return _minigamePlaying;
+        }
+
         public void MinigameStarted()
         {
             Cursor.lockState = CursorLockMode.None;
-
+            _minigamePlaying = true;
             //pause player movement
             OnPausePlayerController.Invoke();
         }
@@ -48,7 +55,7 @@ namespace Game.Core
         public void MinigameFinished()
         {
             Cursor.lockState = CursorLockMode.Locked;
-
+            _minigamePlaying = false;
             //resume player movement
             OnResumePlayerController.Invoke();
         }
